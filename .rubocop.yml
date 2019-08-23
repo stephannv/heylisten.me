@@ -1,0 +1,43 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+
+AllCops:
+  Exclude:
+    - 'bin/bundle'
+    - 'vendor/**/*'
+    - 'db/schema.rb'
+
+Documentation:
+  Enabled: false
+
+Layout/AlignArguments:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Metrics/AbcSize:
+  Exclude:
+    - 'db/migrate/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/migrate/*'
+
+Style/AccessModifierDeclarations:
+  EnforcedStyle: inline
+
+Style/AsciiComments:
+  Exclude:
+    - 'config/initializers/money.rb'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

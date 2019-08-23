@@ -1,0 +1,38 @@
+language: ruby
+
+rvm:
+  - 2.6.3
+
+cache: bundler
+
+stages:
+  - rubocop
+  - rspec
+
+jobs:
+  include:
+    - stage: rubocop
+      script: bundle exec rubocop
+
+    - stage: rspec
+
+      services:
+        - postgresql
+
+      addons:
+        postgresql: "11.4"
+
+      before_install:
+        - sudo apt-get update
+        - sudo apt-get --yes remove postgresql\*
+        - sudo apt-get install -y postgresql-11 postgresql-client-11
+        - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
+        - sudo service postgresql restart 11
+        - psql -c 'CREATE ROLE travis SUPERUSER LOGIN CREATEDB;' -U postgres
+
+      before_script:
+        - cp config/database.yml.ci config/database.yml
+        - bundle exec rake db:create
+        - bundle exec rake db:schema:load
+
+      script: bundle exec rspec spec -f d
