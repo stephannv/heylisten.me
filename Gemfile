@@ -22,7 +22,7 @@ group :development, :test do
   gem 'awesome_print', '1.8.0'
   gem 'byebug', '11.0.1', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '5.0.2'
-  gem 'faker', '2.1.2'
+  gem 'faker', '2.2.0'
   gem 'rspec-rails', '3.8.2'
   gem 'rubocop', '0.74.0'
   gem 'rubocop-performance', '1.4.1'
