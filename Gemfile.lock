@@ -69,7 +69,7 @@ GEM
     ast (2.4.0)
     awesome_print (1.8.0)
     bindex (0.8.1)
-    bootsnap (1.4.4)
+    bootsnap (1.4.5)
       msgpack (~> 1.0)
     bson (4.5.0)
     buftok (0.2.0)
@@ -318,7 +318,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print (= 1.8.0)
-  bootsnap (= 1.4.4)
+  bootsnap (= 1.4.5)
   byebug (= 11.0.1)
   factory_bot_rails (= 5.0.2)
   faker (= 2.2.0)
