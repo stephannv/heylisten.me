@@ -4,13 +4,19 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.3'
 
 gem 'bootsnap', '1.4.4', require: false
-gem 'mongoid', github: 'p-mongo/mongoid', branch: '4730'
+gem 'httparty', '0.17.0'
+gem 'money-rails', '1.13.2'
+gem 'mongoid', git: 'https://github.com/mongodb/mongoid.git'
+gem 'mutations', '0.9.0'
 gem 'puma', '3.12.1'
 gem 'rails', '6.0.0'
 gem 'sass-rails', '5.1.0'
+gem 'simple_enum', '2.3.2', require: 'simple_enum/mongoid'
 gem 'turbolinks', '5.2.0'
+gem 'twitter', '6.2.0'
 gem 'tzinfo-data', '1.2.5', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker', '4.0.7'
+gem 'whenever', '1.0.0', require: false
 
 group :development, :test do
   gem 'awesome_print', '1.8.0'
@@ -31,6 +37,7 @@ group :development do
 end
 
 group :test do
-  gem 'shoulda-matchers', '4.1.2'
+  gem 'mongoid-rspec', '4.0.1'
   gem 'simplecov', '0.17.0'
+  gem 'webmock', '3.7.0'
 end
