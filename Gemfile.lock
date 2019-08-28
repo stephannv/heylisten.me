@@ -166,7 +166,8 @@ GEM
     parser (2.6.3.0)
       ast (~> 2.4.0)
     public_suffix (3.1.1)
-    puma (3.12.1)
+    puma (4.1.0)
+      nio4r (~> 2.0)
     rack (2.0.7)
     rack-proxy (0.6.5)
       rack
@@ -327,7 +328,7 @@ DEPENDENCIES
   mongoid!
   mongoid-rspec (= 4.0.1)
   mutations (= 0.9.0)
-  puma (= 3.12.1)
+  puma (= 4.1.0)
   rails (= 6.0.0)
   rspec-rails (= 3.8.2)
   rubocop (= 0.74.0)
