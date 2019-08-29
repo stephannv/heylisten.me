@@ -9,6 +9,6 @@ FactoryBot.define do
     pretty_release_date { Faker::Lorem.word }
     image_url { Faker::Avatar.image }
     website_url { Faker::Internet.url }
-    data { { some_data: 'some data' } }
+    data { { 'some_data' => 'some data' } }
   end
 end
