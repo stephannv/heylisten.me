@@ -2,6 +2,9 @@ FactoryBot.define do
   factory :event do
     item
     event_type { Event.event_types.values.sample }
-    data { { key: 'value' } }
+
+    after :build do |event|
+      event.data = event.item.attributes
+    end
   end
 end

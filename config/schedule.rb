@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every :hour, at: 5 do
-  rake 'import:items'
+  runner 'ExecuteHourlyUpdate.run!'
 end

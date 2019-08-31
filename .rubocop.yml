@@ -14,6 +14,9 @@ Documentation:
 Layout/AlignArguments:
   EnforcedStyle: with_fixed_indentation
 
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: start_of_line
+
 Layout/MultilineMethodCallBraceLayout:
   EnforcedStyle: new_line
 
