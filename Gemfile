@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.3'
 
 gem 'bootsnap', '1.4.5', require: false
+gem 'down', '4.8.1'
 gem 'httparty', '0.17.0'
 gem 'money-rails', '1.13.2'
 gem 'mongoid', git: 'https://github.com/mongodb/mongoid.git'

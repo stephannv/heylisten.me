@@ -69,62 +69,11 @@ RSpec.describe Item, type: :model do
 
   describe 'Callbacks' do
     describe 'After save' do
-      context 'when is a new record' do
-        let(:item) { create(:item) }
-
-        it 'creates a item_added event' do
-          expect { item }.to change(Event, :count).by(1)
-          event = Event.last
-          expect(event.item_id).to eq item.id
-          expect(event).to be_item_added
-          event_data = event.data.except('created_at', 'updated_at')
-          expect(event_data).to eq item.attributes.except('created_at', 'updated_at')
-        end
-      end
-
-      context 'when is a persisted record' do
-        let!(:item) { create(:item) }
-
-        context 'when title or pretty_release_date changed' do
-          it 'creates a item_changed event' do
-            [{ title: 'new title' }, { pretty_release_date: 'new release date' }].each do |new_attributes|
-              expect { item.update(new_attributes) }.to change(Event, :count).by(1)
-              event = Event.last
-              expect(event.item_id).to eq item.id
-              expect(event).to be_item_changed
-              event_data = event.data.except('created_at', 'updated_at')
-              expect(event_data).to eq item.attributes.except('created_at', 'updated_at')
-            end
-          end
-        end
-
-        context 'when title and pretty_release_date didn`t change' do
-          it 'doesn`t create a event' do
-            other_attributes = Item.attribute_names - %w[_id title pretty_release_date]
-            other_item = build(:item)
-            other_attributes.each do |attribute|
-              expect do
-                item.update!(attribute => other_item[attribute.to_sym])
-              end.to_not change(Event, :count)
-            end
-          end
-        end
-      end
-
-      context 'when a error happen' do
-        let(:item) { create(:item) }
-
-        before { allow_any_instance_of(Item).to receive(:_id_changed?).and_raise('random error') }
-
-        it 'logs error' do
-          expect(Rails.logger).to receive(:error)
-
-          create(:item)
-        end
-
-        it 'returns true' do
-          expect(create(:item)).to be_truthy
-        end
+      it 'calls :create_event' do
+        item = build(:item)
+        expect(CreateEvent).to receive(:run!).with(item: item).twice
+        item.save
+        item.update(title: 'new title')
       end
     end
   end

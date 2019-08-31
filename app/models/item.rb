@@ -58,15 +58,6 @@ class Item
   ### PRIVATE INSTANCE METHODS ###
   ################################
   private def create_event
-    if _id_changed?
-      event_type = :item_added
-    elsif title_changed? || pretty_release_date_changed?
-      event_type = :item_changed
-    end
-
-    events.create!(event_type: event_type, data: attributes) if event_type.present?
-  rescue StandardError => e
-    Rails.logger.error(e)
-    true
+    CreateEvent.run!(item: self)
   end
 end
