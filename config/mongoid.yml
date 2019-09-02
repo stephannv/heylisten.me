@@ -108,7 +108,7 @@ development:
         # The file containing concatenated certificate authority certificates
         # used to validate certs passed from the other end of the connection.
         # ssl_ca_cert: /path/to/ca.cert
-        
+
         # Whether to truncate long log lines. (default: true)
         # truncate_logs: true
 
