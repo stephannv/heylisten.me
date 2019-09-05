@@ -17,6 +17,9 @@ Layout/AlignArguments:
 Layout/EndAlignment:
   EnforcedStyleAlignWith: start_of_line
 
+Layout/IndentFirstArrayElement:
+  EnforcedStyle: consistent
+
 Layout/MultilineMethodCallBraceLayout:
   EnforcedStyle: new_line
 

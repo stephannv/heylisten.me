@@ -6,7 +6,7 @@ If you want to support [@stephann_v](https://twitter.com/stephann_v) and heylist
 # Roadmap
 - [x] Search Nintendo Europe updates
 - [x] Dispatch updates to Twitter
-- [ ] Search Nintendo of America updates
+- [x] Search Nintendo of America updates
 - [ ] Search Nintendo Japan updates
 - [ ] Search Nintendo South America (Brasil, Chile, Argentina, Colombia, etc) updates
 - [ ] Import prices and notify prices drop
