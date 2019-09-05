@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
+gem 'algoliasearch', '1.26.1'
 gem 'bootsnap', '1.4.5', require: false
 gem 'down', '4.8.1'
 gem 'httparty', '0.17.0'
