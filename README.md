@@ -1,12 +1,12 @@
 # Hey, Listen me
 [HeyListen.me](https://HeyListen.me) is a web application that search updates on Nintendo websites (game additions, game updates, prices drop) and dispatch updates to other integrated applications (like Twitter, Discord, Telegram, etc).
 
-If you want to support [@stephann_v](https://twitter.com/stephann_v) and heylisten.me, please consider donating through Patreon: [https://www.patreon.com/stephannv](https://www.patreon.com/stephannv)
+If you want to support [@stephann_v](https://twitter.com/stephann_v) and heylisten.me, please consider donating through Patreon: [https://www.patreon.com/stephann](https://www.patreon.com/stephann)
 
 # Roadmap
 - [x] Search Nintendo Europe updates
 - [x] Dispatch updates to Twitter
-- [ ] Search Nintendo of America updates
+- [x] Search Nintendo of America updates
 - [ ] Search Nintendo Japan updates
 - [ ] Search Nintendo South America (Brasil, Chile, Argentina, Colombia, etc) updates
 - [ ] Import prices and notify prices drop

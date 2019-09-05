@@ -24,11 +24,11 @@ class FetchNintendoEuropeData < Mutations::Command
   private def fetch_data(page:)
     limit = 1000
     offset = limit * (page - 1)
-    response = service.fetch(limit: limit, offset: offset, data_type: data_type)
+    response = client.fetch(limit: limit, offset: offset, data_type: data_type)
     response.dig(:response, :docs)
   end
 
-  private def service
-    @service ||= NintendoEuropeClient.new
+  private def client
+    @client ||= NintendoEuropeClient.new
   end
 end
