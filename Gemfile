@@ -14,7 +14,7 @@ gem 'puma', '4.1.1'
 gem 'rails', '6.0.0'
 gem 'sass-rails', '6.0.0'
 gem 'simple_enum', '2.3.2', require: 'simple_enum/mongoid'
-gem 'turbolinks', '5.2.0'
+gem 'turbolinks', '5.2.1'
 gem 'twitter', '6.2.0'
 gem 'tzinfo-data', '1.2.5', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker', '4.0.7'
