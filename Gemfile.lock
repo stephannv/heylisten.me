@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/mongodb/mongoid.git
-  revision: 1ee363ca165d26a5a3d52088062dc8503e6683d9
+  revision: 555eb55c9d9f6800cf614cc34f211a72b578fe97
   specs:
     mongoid (7.1.0)
       activemodel (>= 5.1, < 6.1)
@@ -139,7 +139,7 @@ GEM
     mimemagic (0.3.3)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.11.3)
+    minitest (5.12.0)
     monetize (1.9.2)
       money (~> 6.12)
     money (6.13.4)
