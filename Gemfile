@@ -23,7 +23,7 @@ gem 'whenever', '1.0.0', require: false
 group :development, :test do
   gem 'awesome_print', '1.8.0'
   gem 'byebug', '11.0.1', platforms: %i[mri mingw x64_mingw]
-  gem 'factory_bot_rails', '5.1.0'
+  gem 'factory_bot_rails', '5.1.1'
   gem 'faker', '2.5.0'
   gem 'rspec-rails', '3.8.2'
   gem 'rubocop', '0.75.0'
