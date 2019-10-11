@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/mongodb/mongoid.git
-  revision: c333f9bb379017c8c6e814a20c58462b35210b3a
+  revision: e5dd6c4259c56bc1b391858459f0a3762922d984
   specs:
     mongoid (7.1.0)
       activemodel (>= 5.1, < 6.1)
@@ -314,7 +314,7 @@ GEM
     websocket-extensions (0.1.4)
     whenever (1.0.0)
       chronic (>= 0.6.3)
-    zeitwerk (2.1.10)
+    zeitwerk (2.2.0)
 
 PLATFORMS
   ruby
