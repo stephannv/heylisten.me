@@ -5,7 +5,7 @@ FactoryBot.define do
     identifier { Faker::Crypto.md5 }
     nsuid { Faker::Crypto.md5 }
     title { "Pokemon: Let`s Go #{Faker::Games::Pokemon.name}" }
-    released_at { Faker::Date.between(from: 7.days.ago, to: Time.zone.today) }
+    released_at { Faker::Date.between(from: Time.zone.today, to: 7.days.from_now) }
     pretty_release_date { Faker::Lorem.word }
     image_url { Faker::Avatar.image }
     website_url { Faker::Internet.url }
