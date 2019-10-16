@@ -50,35 +50,47 @@ RSpec.describe CreateEvent, type: :mutations do
 
       subject { described_class.new(item: item) }
 
-      context 'when item has _id changed' do
-        before { allow(item).to receive(:_id_changed?).and_return(true) }
-
-        it 'returns :item_added' do
-          expect(subject.send(:event_type)).to eq :item_added
-        end
-      end
-
-      context 'when item has title or release date changed' do
-        before { allow(item).to receive(:_id_changed?).and_return(false) }
-
-        it 'returns :item_changed' do
-          %i[title pretty_release_date].each do |attribute|
-            allow(item).to receive("#{attribute}_changed?").and_return(true)
-
-            expect(subject.send(:event_type)).to eq :item_changed
-          end
-        end
-      end
-
-      context 'when item hasn`t relevant changes' do
-        before do
-          %i[_id title pretty_release_date].each do |attribute|
-            allow(item).to receive("#{attribute}_changed?").and_return(false)
-          end
-        end
+      context 'when item release date is before today' do
+        before { allow(item).to receive(:released_at).and_return(Time.zone.yesterday) }
 
         it 'returns nil' do
           expect(subject.send(:event_type)).to be_nil
+        end
+      end
+
+      context 'when item release date is today or after today' do
+        before { allow(item).to receive(:released_at).and_return(Time.zone.tomorrow) }
+
+        context 'when item has _id changed' do
+          before { allow(item).to receive(:_id_changed?).and_return(true) }
+
+          it 'returns :item_added' do
+            expect(subject.send(:event_type)).to eq :item_added
+          end
+        end
+
+        context 'when item has title or release date changed' do
+          before { allow(item).to receive(:_id_changed?).and_return(false) }
+
+          it 'returns :item_changed' do
+            %i[title pretty_release_date].each do |attribute|
+              allow(item).to receive("#{attribute}_changed?").and_return(true)
+
+              expect(subject.send(:event_type)).to eq :item_changed
+            end
+          end
+        end
+
+        context 'when item hasn`t relevant changes' do
+          before do
+            %i[_id title pretty_release_date].each do |attribute|
+              allow(item).to receive("#{attribute}_changed?").and_return(false)
+            end
+          end
+
+          it 'returns nil' do
+            expect(subject.send(:event_type)).to be_nil
+          end
         end
       end
     end
