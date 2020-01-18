@@ -51,6 +51,18 @@ RSpec.describe BuildEventMessage, type: :mutations do
         expect(described_class.run!(event: event)).to eq message.strip
       end
     end
+
+    context 'when is a item doesn`t have pretty release_date' do
+      let(:event) { build(:event, event_type: :item_changed) }
+      let(:item_type) { event.data['item_type_cd'] }
+      let(:data_source) { event.data['data_source_cd'].humanize.titleize }
+
+      it 'doesn`t add release date to message' do
+        event.data['pretty_release_date'] = nil
+
+        expect(described_class.run!(event: event)).to_not include('Release date: ')
+      end
+    end
   end
 
   describe 'Private methods' do

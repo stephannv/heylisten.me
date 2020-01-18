@@ -49,6 +49,7 @@ RSpec.describe NintendoSouthAmericaCrawler, type: :crawler do
         allow(subject).to receive(:crawl_release_date).with(el).and_return('01/01/2020')
         allow(subject).to receive(:crawl_image).with(el).and_return('https://example.com/image.png')
         allow(subject).to receive(:crawl_website_url).with(el).and_return('https://example.com')
+        allow(subject).to receive(:crawl_dlc_availability).with(el).and_return(true)
       end
 
       it 'extracts game data from given page' do
@@ -63,7 +64,7 @@ RSpec.describe NintendoSouthAmericaCrawler, type: :crawler do
           pretty_release_date: '01/01/2020',
           image_url: 'https://example.com/image.png',
           website_url: 'https://example.com',
-          data: { empty: true }
+          data: { is_dlc_available: true }
         }]
 
         expect(data).to eq expected_data
@@ -137,6 +138,34 @@ RSpec.describe NintendoSouthAmericaCrawler, type: :crawler do
 
       it 'returns release date' do
         expect(subject.send(:crawl_release_date, el)).to eq '01/01/2020'
+      end
+    end
+
+    describe '#crawl_dlc_availability' do
+      let(:el) { double }
+
+      context 'when there`s dlc' do
+        before do
+          allow(el).to receive(:css)
+            .with('.category-product-item-img .category-product-item-labels .label.dlc')
+            .and_return([double])
+        end
+
+        it 'returns dlc availability' do
+          expect(subject.send(:crawl_dlc_availability, el)).to eq true
+        end
+      end
+
+      context 'when there isn`t dlc' do
+        before do
+          allow(el).to receive(:css)
+            .with('.category-product-item-img .category-product-item-labels .label.dlc')
+            .and_return([])
+        end
+
+        it 'returns dlc availability' do
+          expect(subject.send(:crawl_dlc_availability, el)).to eq false
+        end
       end
     end
   end

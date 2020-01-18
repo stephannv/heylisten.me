@@ -45,7 +45,7 @@ class BuildEventMessage < Mutations::Command
   end
 
   private def item_release_date
-    "Release date: #{event.data['pretty_release_date']}"
+    "Release date: #{event.data['pretty_release_date']}" if event.data['pretty_release_date'].present?
   end
 
   private def item_website

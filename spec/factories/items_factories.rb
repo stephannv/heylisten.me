@@ -10,5 +10,13 @@ FactoryBot.define do
     image_url { Faker::Avatar.image }
     website_url { Faker::Internet.url }
     data { { 'some_data' => 'some data' } }
+
+    trait :game do
+      item_type { :game }
+    end
+
+    trait :dlc do
+      item_type { :dlc }
+    end
   end
 end

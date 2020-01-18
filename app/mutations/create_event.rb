@@ -11,7 +11,7 @@ class CreateEvent < Mutations::Command
   end
 
   private def event_type
-    return if item.released_at.before?(Time.zone.today)
+    return if item.released_at.present? && item.released_at.before?(Time.zone.today)
 
     @event_type ||= if item._id_changed?
       :item_added

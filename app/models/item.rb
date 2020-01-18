@@ -34,6 +34,15 @@ class Item
   index(title: 1)
   index(released_at: -1)
 
+  ##############
+  ### SCOPES ###
+  ##############
+  scope :from_south_america_with_dlc, lambda {
+    games
+      .in(data_source_cd: %w[nintendo_brasil])
+      .where(data: { is_dlc_available: true })
+  }
+
   ###################
   ### VALIDATIONS ###
   ###################
