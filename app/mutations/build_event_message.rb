@@ -22,13 +22,18 @@ class BuildEventMessage < Mutations::Command
 
   private def message_title
     item_type = event.data['item_type_cd']
-    data_source = event.data['data_source_cd'].humanize.titleize
+    data_source = data_source_title(event.data['data_source_cd'])
 
     if event.item_added?
       "A new #{item_type} was added to #{data_source}."
     elsif event.item_changed?
       "There was an update on a #{item_type} on #{data_source}."
     end
+  end
+
+  private def data_source_title(data_source)
+    flags = data_source_flags(data_source)
+    "#{data_source.humanize.titleize} #{flags}"
   end
 
   private def new_line
@@ -45,5 +50,18 @@ class BuildEventMessage < Mutations::Command
 
   private def item_website
     "More info at: #{event.data['website_url']}"
+  end
+
+  private def data_source_flags(data_source)
+    case data_source.to_s
+    when 'nintendo_america'
+      '🇺🇸🇨🇦🇲🇽'
+    when 'nintendo_europe'
+      '🇪🇺'
+    when 'nintendo_brasil'
+      '🇧🇷'
+    else
+      ''
+    end
   end
 end
