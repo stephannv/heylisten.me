@@ -51,6 +51,23 @@ RSpec.describe Item, type: :model do
     end
   end
 
+  describe 'Scopes' do
+    describe '#from_south_america_with_dlc' do
+      let!(:item_a) { create(:item, :game, data_source: :nintendo_brasil, data: { is_dlc_available: true }) }
+      let!(:item_b) { create(:item, :game, data_source: :nintendo_brasil, data: { is_dlc_available: false }) }
+      let!(:item_c) { create(:item, :game, data_source: :nintendo_america, data: { is_dlc_available: true }) }
+      let!(:item_d) { create(:item, :dlc, data_source: :nintendo_brasil, data: { is_dlc_available: true }) }
+
+      it 'returns items with dlc from south america' do
+        scope_result = Item.from_south_america_with_dlc
+        expect(scope_result).to include(item_a)
+        expect(scope_result).to_not include(item_b)
+        expect(scope_result).to_not include(item_c)
+        expect(scope_result).to_not include(item_d)
+      end
+    end
+  end
+
   describe 'Validations' do
     it { is_expected.to validate_presence_of(:identifier) }
     it { is_expected.to validate_presence_of(:title) }
