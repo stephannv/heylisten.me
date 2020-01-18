@@ -26,7 +26,9 @@ class NintendoSouthAmericaCrawler
         pretty_release_date: crawl_release_date(el),
         image_url: crawl_image(el),
         website_url: crawl_website_url(el),
-        data: { empty: true }
+        data: {
+          is_dlc_available: crawl_dlc_availability(el)
+        }
       }
     end
   end
@@ -50,5 +52,9 @@ class NintendoSouthAmericaCrawler
 
   private def crawl_release_date(element)
     element.css('div.category-product-item-released').first.content.strip[-10..-1]
+  end
+
+  private def crawl_dlc_availability(element)
+    element.css('.category-product-item-img .category-product-item-labels .label.dlc').present?
   end
 end

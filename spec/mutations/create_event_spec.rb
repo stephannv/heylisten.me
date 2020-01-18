@@ -58,6 +58,17 @@ RSpec.describe CreateEvent, type: :mutations do
         end
       end
 
+      context 'when item doesn`t have release date' do
+        before do
+          allow(item).to receive(:released_at).and_return(nil)
+          allow(item).to receive(:_id_changed?).and_return(true)
+        end
+
+        it 'doesn`t returns nil' do
+          expect(subject.send(:event_type)).to_not be_nil
+        end
+      end
+
       context 'when item release date is today or after today' do
         before { allow(item).to receive(:released_at).and_return(Time.zone.tomorrow) }
 
