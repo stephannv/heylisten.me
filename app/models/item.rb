@@ -12,7 +12,11 @@ class Item
   ### FIELDS ###
   ##############
   as_enum :item_type, %i[game dlc bundle subscription ticket], map: :string, field: { type: String }
-  as_enum :data_source, %i[nintendo_europe nintendo_america], map: :string, field: { type: String }
+
+  as_enum :data_source,
+    %i[nintendo_europe nintendo_america nintendo_brasil],
+    map: :string,
+    field: { type: String }
 
   field :identifier, type: String
   field :nsuid, type: String

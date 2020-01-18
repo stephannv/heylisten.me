@@ -8,17 +8,17 @@ AllCops:
     - 'vendor/**/*'
     - 'db/schema.rb'
 
-Documentation:
-  Enabled: false
-
-Layout/AlignArguments:
+Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
 
 Layout/EndAlignment:
   EnforcedStyleAlignWith: start_of_line
 
-Layout/IndentFirstArrayElement:
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
+
+Layout/LineLength:
+  Max: 120
 
 Layout/MultilineMethodCallBraceLayout:
   EnforcedStyle: new_line
@@ -34,9 +34,6 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
-Metrics/LineLength:
-  Max: 120
-
 Metrics/MethodLength:
   Exclude:
     - 'db/migrate/*'
@@ -47,6 +44,9 @@ Style/AccessModifierDeclarations:
 Style/AsciiComments:
   Exclude:
     - 'config/initializers/money.rb'
+
+Style/Documentation:
+  Enabled: false
 
 Style/FrozenStringLiteralComment:
   Enabled: false
