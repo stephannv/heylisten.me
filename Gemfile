@@ -5,7 +5,7 @@ ruby '2.6.3'
 
 gem 'algoliasearch', '1.27.1'
 gem 'bootsnap', '1.4.5', require: false
-gem 'down', '5.1.0'
+gem 'down', '5.1.1'
 gem 'httparty', '0.17.3'
 gem 'money-rails', '1.13.3'
 gem 'mongoid', '7.1.0.rc0'
