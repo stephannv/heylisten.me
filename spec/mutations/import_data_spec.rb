@@ -8,6 +8,7 @@ RSpec.describe ImportData, type: :mutations do
       expect(ImportNintendoNorthAmericaData).to receive(:run!)
       expect(ImportNintendoSouthAmericaData).to receive(:run!)
       expect(ImportNintendoSouthAmericaDlcData).to receive(:run!)
+      expect(ImportNintendoJapanData).to receive(:run!)
 
       subject.execute
     end

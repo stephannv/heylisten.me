@@ -87,9 +87,15 @@ RSpec.describe BuildEventMessage, type: :mutations do
         end
       end
 
+      context 'when data source is nintendo brasil' do
+        it 'returns brazilian flag' do
+          expect(subject.send(:data_source_flags, :nintendo_japan)).to eq '🇯🇵'
+        end
+      end
+
       context 'when data source isn`t mapped' do
-        it 'returns blank' do
-          expect(subject.send(:data_source_flags, :nintendo_caucaia)).to eq ''
+        it 'returns nil' do
+          expect(subject.send(:data_source_flags, :nintendo_caucaia)).to be_nil
         end
       end
     end

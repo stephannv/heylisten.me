@@ -45,7 +45,8 @@ RSpec.describe Item, type: :model do
       enum = {
         'nintendo_europe' => 'nintendo_europe',
         'nintendo_america' => 'nintendo_america',
-        'nintendo_brasil' => 'nintendo_brasil'
+        'nintendo_brasil' => 'nintendo_brasil',
+        'nintendo_japan' => 'nintendo_japan'
       }
       expect(described_class.data_sources.hash).to eq(enum)
     end
