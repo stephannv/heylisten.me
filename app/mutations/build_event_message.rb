@@ -1,4 +1,11 @@
 class BuildEventMessage < Mutations::Command
+  FLAGS = {
+    nintendo_america: '🇺🇸🇨🇦🇲🇽',
+    nintendo_europe: '🇪🇺',
+    nintendo_brasil: '🇧🇷',
+    nintendo_japan: '🇯🇵'
+  }.freeze
+
   required do
     model :event, type: Event, new_records: true
   end
@@ -53,15 +60,6 @@ class BuildEventMessage < Mutations::Command
   end
 
   private def data_source_flags(data_source)
-    case data_source.to_s
-    when 'nintendo_america'
-      '🇺🇸🇨🇦🇲🇽'
-    when 'nintendo_europe'
-      '🇪🇺'
-    when 'nintendo_brasil'
-      '🇧🇷'
-    else
-      ''
-    end
+    FLAGS[data_source.to_sym]
   end
 end

@@ -4,6 +4,7 @@ class ImportData < Mutations::Command
     import_nintendo_north_america_data
     import_nintendo_south_america_data
     import_nintendo_south_america_dlc_data
+    import_nintendo_japan_data
   end
 
   private def import_nintendo_europe_data
@@ -27,8 +28,14 @@ class ImportData < Mutations::Command
   end
 
   private def import_nintendo_south_america_dlc_data
-    Task.start 'Import Nintendo South America data' do
+    Task.start 'Import Nintendo South America DLC data' do
       ImportNintendoSouthAmericaDlcData.run!
+    end
+  end
+
+  private def import_nintendo_japan_data
+    Task.start 'Import Nintendo Japan data' do
+      ImportNintendoJapanData.run!
     end
   end
 end
