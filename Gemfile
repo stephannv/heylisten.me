@@ -8,7 +8,7 @@ gem 'bootsnap', '1.4.6', require: false
 gem 'down', '5.1.1'
 gem 'httparty', '0.18.0'
 gem 'money-rails', '1.13.3'
-gem 'mongoid', '7.1.0.rc0'
+gem 'mongoid', '7.1.0'
 gem 'mutations', '0.9.0'
 gem 'nokogiri', '1.10.9'
 gem 'puma', '4.3.3'
