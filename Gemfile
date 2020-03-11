@@ -42,5 +42,5 @@ end
 group :test do
   gem 'mongoid-rspec', '4.0.1'
   gem 'simplecov', '0.18.5'
-  gem 'webmock', '3.8.2'
+  gem 'webmock', '3.8.3'
 end
