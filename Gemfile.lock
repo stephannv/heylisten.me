@@ -222,7 +222,7 @@ GEM
     rspec-mocks (3.9.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
-    rspec-rails (3.9.0)
+    rspec-rails (3.9.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
@@ -315,7 +315,7 @@ GEM
     websocket-extensions (0.1.4)
     whenever (1.0.0)
       chronic (>= 0.6.3)
-    zeitwerk (2.2.2)
+    zeitwerk (2.3.0)
 
 PLATFORMS
   ruby
@@ -337,7 +337,7 @@ DEPENDENCIES
   nokogiri (= 1.10.9)
   puma (= 4.3.3)
   rails (= 6.0.2.1)
-  rspec-rails (= 3.9.0)
+  rspec-rails (= 3.9.1)
   rubocop (= 0.80.1)
   rubocop-performance (= 1.5.2)
   rubocop-rails (= 2.4.2)
