@@ -1,22 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe NintendoNorthAmericaClient, type: :clients do
-  describe 'Constants' do
-    it 'has PRICE_FILTERS constant' do
-      expect(described_class::PRICES_FILTERS).to eq(
-        [
-          nil,
-          'priceRange:"Free to start"',
-          'priceRange:"$0 - $4.99"',
-          'priceRange:"$5 - $9.99"',
-          'priceRange:"$10 - $19.99"',
-          'priceRange:"$20 - $39.99"',
-          'priceRange:"$40+"'
-        ]
-      )
-    end
-  end
-
   describe 'Instance methods' do
     describe '#index_desc' do
       let(:index) { double }
@@ -24,7 +8,7 @@ RSpec.describe NintendoNorthAmericaClient, type: :clients do
       context 'when @index_desc is nil' do
         before do
           subject.instance_variable_set('@index_desc', nil)
-          allow(Algolia::Index).to receive(:new).with('noa_aem_game_en_us_release_des').and_return(index)
+          allow(Algolia::Index).to receive(:new).with('ncom_game_en_us_title_des').and_return(index)
         end
 
         it 'returns a algolia index with release date desc' do
@@ -50,7 +34,7 @@ RSpec.describe NintendoNorthAmericaClient, type: :clients do
       context 'when @index_asc is nil' do
         before do
           subject.instance_variable_set('@index_asc', nil)
-          allow(Algolia::Index).to receive(:new).with('noa_aem_game_en_us_release_asc').and_return(index)
+          allow(Algolia::Index).to receive(:new).with('ncom_game_en_us_title_asc').and_return(index)
         end
 
         it 'returns a algolia index with release date desc' do
@@ -74,32 +58,16 @@ RSpec.describe NintendoNorthAmericaClient, type: :clients do
       let(:index) { subject.index_desc }
       let(:hits) { [double] }
       let(:response) { { 'hits' => hits } }
-      let(:filters) { subject.send(:build_filters, 'some filter') }
+      let(:query) { Faker::Lorem.word }
 
       before do
-        allow(index).to receive(:search).with('', hitsPerPage: 1000, filters: filters).and_return(response)
+        allow(index).to receive(:search)
+          .with(query, queryType: 'prefixAll', hitsPerPage: 1000, filters: 'platform:"Nintendo Switch"')
+          .and_return(response)
       end
 
       it 'returns hits from search result' do
-        expect(subject.fetch(index: index, price_filter: 'some filter')).to eq hits
-      end
-    end
-  end
-
-  describe 'Private instance methods' do
-    describe '#build_filters' do
-      context 'when prices_filter is nil' do
-        it 'returns only platform filter' do
-          expect(subject.send(:build_filters, nil)).to eq 'platform:"Nintendo Switch"'
-        end
-      end
-
-      context 'when prices_filter isn`t nil' do
-        let(:filter) { Faker::Lorem.word }
-
-        it 'concatenates prices_filter with platform filter' do
-          expect(subject.send(:build_filters, filter)).to eq('platform:"Nintendo Switch"' + ' AND ' + filter)
-        end
+        expect(subject.fetch(index: index, query: query)).to eq hits
       end
     end
   end

@@ -2,9 +2,9 @@
   "name": "heylisten_me",
   "private": true,
   "dependencies": {
+    "@rails/actioncable": "^6.0.0-alpha",
     "@rails/ujs": "^6.0.0-alpha",
-    "turbolinks": "^5.2.0",
-    "@rails/actioncable": "^6.0.0-alpha"
+    "turbolinks": "^5.2.0"
   },
   "version": "0.1.0"
 }

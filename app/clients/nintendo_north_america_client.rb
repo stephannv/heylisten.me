@@ -1,29 +1,14 @@
 class NintendoNorthAmericaClient
-  PRICES_FILTERS = [
-    nil,
-    'priceRange:"Free to start"',
-    'priceRange:"$0 - $4.99"',
-    'priceRange:"$5 - $9.99"',
-    'priceRange:"$10 - $19.99"',
-    'priceRange:"$20 - $39.99"',
-    'priceRange:"$40+"'
-  ].freeze
-
-  def fetch(index:, price_filter:)
-    filters = build_filters(price_filter)
-    response = index.search('', hitsPerPage: 1000, filters: filters)
-    response['hits'].to_a
-  end
-
-  def index_desc
-    @index_desc ||= Algolia::Index.new('noa_aem_game_en_us_release_des')
+  def fetch(index:, query:)
+    response = index.search(query, queryType: 'prefixAll', hitsPerPage: 1000, filters: 'platform:"Nintendo Switch"')
+    response.with_indifferent_access[:hits].to_a
   end
 
   def index_asc
-    @index_asc ||= Algolia::Index.new('noa_aem_game_en_us_release_asc')
+    @index_asc ||= Algolia::Index.new('ncom_game_en_us_title_asc')
   end
 
-  private def build_filters(price_filter)
-    ['platform:"Nintendo Switch"', price_filter].compact.join(' AND ')
+  def index_desc
+    @index_desc ||= Algolia::Index.new('ncom_game_en_us_title_des')
   end
 end

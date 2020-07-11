@@ -1,4 +1,3 @@
-
 SimpleCov.start do
   add_group 'Controllers', 'app/controllers'
   add_group 'Data Adapters', 'app/data_adapters'
