@@ -4,16 +4,20 @@ class FetchNintendoNorthAmericaData < Mutations::Command
   end
 
   private def fetch_all_data
-    all_data = NintendoNorthAmericaClient::PRICES_FILTERS.map do |price_filter|
-      fetch_data(price_filter: price_filter)
+    all_data = queries.flat_map do |query|
+      fetch_data(query: query)
     end
 
-    all_data.reduce(&:+).uniq { |d| d['objectID'] }
+    all_data.uniq { |d| d[:objectID] }
   end
 
-  private def fetch_data(price_filter:)
-    data = client.fetch(index: client.index_desc, price_filter: price_filter)
-    data += client.fetch(index: client.index_asc, price_filter: price_filter) if data.size >= 1000
+  private def queries
+    ('a'..'z').to_a + ('0'..'9').to_a
+  end
+
+  private def fetch_data(query:)
+    data = client.fetch(index: client.index_asc, query: query)
+    data += client.fetch(index: client.index_desc, query: query) if data.size >= 1000
     data
   end
 
