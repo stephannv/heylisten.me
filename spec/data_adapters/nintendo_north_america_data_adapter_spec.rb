@@ -43,16 +43,16 @@ describe NintendoNorthAmericaDataAdapter, type: :data_adapters do
     context 'adapting released_at' do
       subject { described_class.new(data: data).adapt }
 
-      context 'when releaseDateMask is a valid date' do
-        let(:data) { { 'releaseDateMask' => Time.zone.yesterday.to_s } }
+      context 'when releaseDateDisplay is a valid date' do
+        let(:data) { { 'releaseDateDisplay' => Time.zone.yesterday.to_s } }
 
-        it 'returns releaseDateMask converted to date' do
+        it 'returns releaseDateDisplay converted to date' do
           expect(subject[:released_at]).to eq Time.zone.yesterday
         end
       end
 
       context 'when theres some error on parsing dates' do
-        let(:data) { { 'releaseDateMask' => Faker::Lorem.word } }
+        let(:data) { { 'releaseDateDisplay' => Faker::Lorem.word } }
 
         it 'returns 31/12/2050' do
           expect(subject[:released_at]).to eq '31/12/2050'.to_date
@@ -63,19 +63,19 @@ describe NintendoNorthAmericaDataAdapter, type: :data_adapters do
     context 'adapting pretty_release_date' do
       subject { described_class.new(data: data).adapt }
 
-      context 'when releaseDateMask is a valid date' do
-        let(:data) { { 'releaseDateMask' => Time.zone.now.to_s } }
+      context 'when releaseDateDisplay is a valid date' do
+        let(:data) { { 'releaseDateDisplay' => Time.zone.now.to_s } }
 
-        it 'returns releaseDateMask converted to date' do
+        it 'returns releaseDateDisplay converted to date' do
           expect(subject[:pretty_release_date]).to eq Time.zone.today.to_s
         end
       end
 
       context 'when theres some error on parsing dates' do
-        let(:data) { { 'releaseDateMask' => Faker::Lorem.word } }
+        let(:data) { { 'releaseDateDisplay' => Faker::Lorem.word } }
 
         it 'returns 31/12/2050' do
-          expect(subject[:pretty_release_date]).to eq '31/12/2050'
+          expect(subject[:pretty_release_date]).to eq data['releaseDateDisplay']
         end
       end
     end
@@ -83,10 +83,10 @@ describe NintendoNorthAmericaDataAdapter, type: :data_adapters do
     context 'adapting image_url' do
       subject { described_class.new(data: data).adapt }
 
-      let(:data) { { 'boxArt' => Faker::Lorem.word } }
+      let(:data) { { 'boxart' => Faker::Lorem.word } }
 
       it 'returns `https:` + image_url_sq_s' do
-        expect(subject[:image_url]).to eq "https://www.nintendo.com#{data['boxArt']}"
+        expect(subject[:image_url]).to eq "https://www.nintendo.com#{data['boxart']}"
       end
     end
 
