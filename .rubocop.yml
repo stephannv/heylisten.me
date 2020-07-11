@@ -4,9 +4,10 @@ require:
 
 AllCops:
   Exclude:
-    - 'bin/bundle'
-    - 'vendor/**/*'
-    - 'db/schema.rb'
+    - bin/bundle
+    - vendor/**/*
+    - db/schema.rb
+    - bin/*
 
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
