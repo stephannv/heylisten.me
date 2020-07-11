@@ -65,6 +65,12 @@ RSpec.describe FetchNintendoNorthAmericaData, type: :mutations do
       end
     end
 
+    describe '#queries' do
+      it 'returns A to Z and 0 to 9' do
+        expect(subject.send(:queries)).to eq(('a'..'z').to_a + ('0'..'9').to_a)
+      end
+    end
+
     describe '#fetch_all_data' do
       let(:filter_1) { Faker::Lorem.unique.word }
       let(:filter_2) { Faker::Lorem.unique.word }
