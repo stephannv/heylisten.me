@@ -41,19 +41,19 @@ class NintendoNorthAmericaDataAdapter
   end
 
   private def released_at
-    @data['releaseDateMask'].to_date
+    @data['releaseDateDisplay'].to_date
   rescue StandardError
     '31/12/2050'.to_date
   end
 
   private def pretty_release_date
-    @data['releaseDateMask'].to_date.to_s
+    @data['releaseDateDisplay'].to_date.to_s
   rescue StandardError
-    '31/12/2050'
+    @data['releaseDateDisplay']
   end
 
   private def image_url
-    "https://www.nintendo.com#{@data['boxArt']}"
+    "https://www.nintendo.com#{@data['boxart']}"
   end
 
   private def website_url
