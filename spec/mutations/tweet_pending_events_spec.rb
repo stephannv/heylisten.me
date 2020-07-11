@@ -4,19 +4,25 @@ RSpec.describe TweetPendingEvents, type: :mutations do
   describe 'Behavior' do
     let!(:pending_event_1) do
       item = create(:item)
-      item.events.first.dispatches.first.update!(situation: :pending)
+      item.events.first.dispatches.first.update!(situation: :pending, target: :twitter)
       item.events.first
     end
 
     let!(:pending_event_2) do
       item = create(:item)
-      item.events.first.dispatches.first.update!(situation: :pending)
+      item.events.first.dispatches.first.update!(situation: :pending, target: :twitter)
       item.events.first
     end
 
     let!(:failed_event) do
       item = create(:item)
-      item.events.first.dispatches.first.update!(situation: :done)
+      item.events.first.dispatches.first.update!(situation: :failed, target: :twitter)
+      item.events.first
+    end
+
+    let!(:discord_event) do
+      item = create(:item)
+      item.events.first.dispatches.first.update!(situation: :pending, target: :discord)
       item.events.first
     end
 
@@ -31,6 +37,7 @@ RSpec.describe TweetPendingEvents, type: :mutations do
     it 'tweet pending event message' do
       expect(TweetEvent).to receive(:run!).with(event: pending_event_1, previous_tweet: nil).ordered
       expect(TweetEvent).to receive(:run!).with(event: pending_event_2, previous_tweet: previous_tweet).ordered
+      expect(TweetEvent).to_not receive(:run!)
 
       subject.execute
     end

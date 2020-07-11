@@ -13,6 +13,7 @@ RSpec.describe Event, type: :model do
     it { is_expected.to have_field(:event_type_cd).of_type(String) }
     it { is_expected.to have_field(:message).of_type(String) }
     it { is_expected.to have_field(:data).of_type(Hash) }
+    it { is_expected.to have_field(:webhook_data).of_type(Hash) }
   end
 
   describe 'Indexes' do
@@ -50,14 +51,25 @@ RSpec.describe Event, type: :model do
         event.validate
         expect(event.message).to eq message
       end
+
+      it 'fills webhook_data' do
+        event = build(:event)
+        webhook_data = Hash[*Faker::Lorem.words(number: 4)]
+        allow(BuildEventWebhookData).to receive(:run!).with(event: event).and_return(webhook_data)
+        event.validate
+        expect(event.webhook_data).to eq webhook_data
+      end
     end
 
     describe 'After create' do
-      it 'creates a pending dispatch' do
+      it 'creates a twitter pending dispatches' do
         event = build(:event)
 
-        expect { event.save }.to change(event.dispatches, :count).by(1)
+        expect { event.save }.to change(event.dispatches, :count).by(2)
         expect(event.dispatches.first).to be_pending
+        expect(event.dispatches.first.target).to eq :twitter
+        expect(event.dispatches.last).to be_pending
+        expect(event.dispatches.last.target).to eq :discord
       end
     end
   end
