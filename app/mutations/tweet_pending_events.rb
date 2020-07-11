@@ -5,7 +5,7 @@ class TweetPendingEvents < Mutations::Command
   end
 
   private def fetch_pending_events
-    @pending_events = Event.elem_match(dispatches: { situation_cd: 'pending' })
+    @pending_events = Event.elem_match(dispatches: { target_cd: 'twitter', situation_cd: 'pending' })
   end
 
   private def tweet_events
