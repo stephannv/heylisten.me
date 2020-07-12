@@ -2,29 +2,33 @@ require 'discordrb/webhooks'
 
 class DispatchPendingDiscordEvents < Mutations::Command
   def execute
-    dispatch_events
+    dispatch_events_batches
   end
 
   private def dispatch_events
-    pending_events = nil
-
-    (1..).each do |page|
-      pending_events = fetch_pending_events(page: page)
+    loop do
+      pending_events = fetch_pending_events
 
       break if pending_events.blank?
 
-      client.execute(build_builder(pending_events))
-      pending_events.update(dispatches: { situation: :done })
+      builder = build_builder(events)
+      dispatch_builder(builder)
     end
-  rescue StandardError => e
-    pending_events.update(dispatches: { situation: :failed, message: e.message })
   end
 
-  private def fetch_pending_events(page:)
+  private def fetch_pending_events
     Event
       .elem_match(dispatches: { target_cd: 'discord', situation_cd: 'pending' })
-      .offset(10 * (page - 1))
       .limit(10)
+      .to_a
+  end
+
+  private def dispatch_builder(builder)
+    client.execute(builder, true)
+  rescue StandardError
+    pending_events.each { |ev| ev.dispatches.where(target_cd: 'discord').each { |d| d.update!(situation: :failed) } }
+  else
+    pending_events.each { |ev| ev.dispatches.where(target_cd: 'discord').each { |d| d.update!(situation: :done) } }
   end
 
   private def client
