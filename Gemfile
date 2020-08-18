@@ -18,7 +18,7 @@ gem 'simple_enum', '2.3.2', require: 'simple_enum/mongoid'
 gem 'turbolinks', '5.2.1'
 gem 'twitter', '7.0.0'
 gem 'tzinfo-data', '2.0.2', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'webpacker', '5.1.1'
+gem 'webpacker', '5.2.1'
 gem 'whenever', '1.0.0', require: false
 
 group :development, :test do
