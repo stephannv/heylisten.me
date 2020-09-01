@@ -145,7 +145,7 @@ GEM
     mimemagic (0.3.5)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.14.1)
+    minitest (5.14.2)
     mongo (2.12.2)
       bson (>= 4.8.2, < 5.0.0)
     mongoid (7.1.2)
