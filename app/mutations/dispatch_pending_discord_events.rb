@@ -2,7 +2,7 @@ require 'discordrb/webhooks'
 
 class DispatchPendingDiscordEvents < Mutations::Command
   def execute
-    dispatch_events_batches
+    dispatch_events
   end
 
   private def dispatch_events
@@ -11,8 +11,13 @@ class DispatchPendingDiscordEvents < Mutations::Command
 
       break if pending_events.blank?
 
-      builder = build_builder(events)
-      dispatch_builder(builder)
+      begin
+        client.execute(build_builder(pending_events), true)
+      rescue => e
+        pending_events.each { |e| e.dispatches.where(target_cd: 'discord').each { |d| d.update!(situation: :failed) } }
+      else
+        pending_events.each { |e| e.dispatches.where(target_cd: 'discord').each { |d| d.update!(situation: :done) } }
+      end
     end
   end
 
@@ -23,21 +28,13 @@ class DispatchPendingDiscordEvents < Mutations::Command
       .to_a
   end
 
-  private def dispatch_builder(builder)
-    client.execute(builder, true)
-  rescue StandardError
-    pending_events.each { |ev| ev.dispatches.where(target_cd: 'discord').each { |d| d.update!(situation: :failed) } }
-  else
-    pending_events.each { |ev| ev.dispatches.where(target_cd: 'discord').each { |d| d.update!(situation: :done) } }
-  end
-
   private def client
     @client ||= Discordrb::Webhooks::Client.new(url: Rails.application.credentials.discord_webhook_url)
   end
 
   private def build_builder(events)
     builder = Discordrb::Webhooks::Builder.new
-    builder.content = 'Hey, Listen me! Here go some updates for you'
+    builder.content = 'Here go some updates for you'
     events.each do |event|
       builder << build_embed(event)
     end

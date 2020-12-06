@@ -23,7 +23,7 @@ class BuildEventWebhookData < Mutations::Command
         },
         {
           name: 'Release Date',
-          value: event.data['pretty_release_date'] || 'TBD'
+          value: event.data['pretty_release_date'].presence || 'TBD'
         }
       ]
     }
