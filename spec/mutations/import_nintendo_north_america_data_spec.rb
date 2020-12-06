@@ -36,7 +36,7 @@ RSpec.describe ImportNintendoNorthAmericaData, type: :mutations do
 
     before do
       subject.instance_variable_set('@data_collection', data_colletion)
-      allow(NintendoNorthAmericaDataAdapter).to receive(:new)
+      allow(NintendoAlgoliaDataAdapter).to receive(:new)
         .with(data: data_item)
         .and_return(adapter)
     end

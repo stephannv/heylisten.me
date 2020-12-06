@@ -1,4 +1,4 @@
-class FetchNintendoNorthAmericaData < Mutations::Command
+class FetchNintendoBrasilData < Mutations::Command
   def execute
     fetch_all_data
   end
@@ -16,8 +16,8 @@ class FetchNintendoNorthAmericaData < Mutations::Command
   end
 
   private def fetch_data(query:)
-    data = client.fetch(index: client.index_asc, query: query)
-    data += client.fetch(index: client.index_desc, query: query) if data.size >= 1000
+    data = client.fetch(index: client.index_br_asc, query: query)
+    data += client.fetch(index: client.index_br_desc, query: query) if data.size >= 1000
     data
   end
 

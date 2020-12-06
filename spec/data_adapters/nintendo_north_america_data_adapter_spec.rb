@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe NintendoNorthAmericaDataAdapter, type: :data_adapters do
+describe NintendoAlgoliaDataAdapter, type: :data_adapters do
   describe 'Adapted fields' do
     let(:data) { {} }
 

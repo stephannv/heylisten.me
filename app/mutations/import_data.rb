@@ -1,9 +1,8 @@
 class ImportData < Mutations::Command
   def execute
+    # import_nintendo_brasil_data
     import_nintendo_europe_data
     import_nintendo_north_america_data
-    import_nintendo_south_america_data
-    import_nintendo_south_america_dlc_data
     import_nintendo_japan_data
   end
 
@@ -13,29 +12,39 @@ class ImportData < Mutations::Command
         ImportNintendoEuropeData.run!(data_type: data_type)
       end
     end
+
+    Task.start 'Dispatch Nintendo Europe updates' do
+      DispatchPendingDiscordEvents.run!
+    end
   end
 
   private def import_nintendo_north_america_data
     Task.start 'Import Nintendo North America data' do
       ImportNintendoNorthAmericaData.run!
     end
-  end
 
-  private def import_nintendo_south_america_data
-    Task.start 'Import Nintendo South America data' do
-      ImportNintendoSouthAmericaData.run!
+    Task.start 'Dispatch Nintendo America updates' do
+      DispatchPendingDiscordEvents.run!
     end
   end
 
-  private def import_nintendo_south_america_dlc_data
-    Task.start 'Import Nintendo South America DLC data' do
-      ImportNintendoSouthAmericaDlcData.run!
+  private def import_nintendo_brasil_data
+    Task.start 'Import Nintendo Brasil data' do
+      ImportNintendoBrasilData.run!
+    end
+
+    Task.start 'Dispatch Nintendo Brasil updates' do
+      DispatchPendingDiscordEvents.run!
     end
   end
 
   private def import_nintendo_japan_data
     Task.start 'Import Nintendo Japan data' do
       ImportNintendoJapanData.run!
+    end
+
+    Task.start 'Dispatch Nintendo Japan updates' do
+      DispatchPendingDiscordEvents.run!
     end
   end
 end

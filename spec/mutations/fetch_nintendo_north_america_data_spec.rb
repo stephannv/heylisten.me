@@ -28,7 +28,7 @@ RSpec.describe FetchNintendoNorthAmericaData, type: :mutations do
       context 'when @client is nil' do
         before do
           subject.instance_variable_set('@client', nil)
-          allow(NintendoNorthAmericaClient).to receive(:new).and_return(client)
+          allow(NintendoAlgoliaClient).to receive(:new).and_return(client)
         end
 
         it 'returns @client' do

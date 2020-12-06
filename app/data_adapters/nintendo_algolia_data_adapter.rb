@@ -1,6 +1,7 @@
-class NintendoNorthAmericaDataAdapter
-  def initialize(data:)
+class NintendoAlgoliaDataAdapter
+  def initialize(data:, data_source:)
     @data = data
+    @data_source = data_source
   end
 
   # rubocop:disable Metrics/MethodLength
@@ -21,7 +22,7 @@ class NintendoNorthAmericaDataAdapter
   # rubocop:enable Metrics/MethodLength
 
   private def data_source
-    :nintendo_america
+    @data_source
   end
 
   private def data_type

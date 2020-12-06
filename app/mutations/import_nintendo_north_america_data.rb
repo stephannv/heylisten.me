@@ -11,7 +11,7 @@ class ImportNintendoNorthAmericaData < Mutations::Command
 
   private def parse_data
     @parsed_data_collection = @data_collection.map do |data|
-      NintendoNorthAmericaDataAdapter.new(data: data).adapt
+      NintendoAlgoliaDataAdapter.new(data: data, data_source: :nintendo_america).adapt
     end
   end
 

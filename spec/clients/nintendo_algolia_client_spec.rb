@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe NintendoNorthAmericaClient, type: :clients do
+RSpec.describe NintendoAlgoliaClient, type: :clients do
   describe 'Instance methods' do
     describe '#index_desc' do
       let(:index) { double }
