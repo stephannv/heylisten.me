@@ -27,7 +27,7 @@ group :development, :test do
   gem 'factory_bot_rails', '6.1.0'
   gem 'faker', '2.13.0'
   gem 'rspec-rails', '4.0.1'
-  gem 'rubocop', '0.88.0'
+  gem 'rubocop', '1.5.2'
   gem 'rubocop-performance', '1.7.1'
   gem 'rubocop-rails', '2.7.1'
 end
