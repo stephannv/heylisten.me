@@ -13,10 +13,10 @@ class NintendoAlgoliaClient
   end
 
   def index_br_asc
-    @index_asc ||= Algolia::Index.new('ncom_game_pt_br_title_asc')
+    @index_br_asc ||= Algolia::Index.new('ncom_game_pt_br_title_asc')
   end
 
   def index_br_desc
-    @index_desc ||= Algolia::Index.new('ncom_game_pt_br_title_des')
+    @index_br_desc ||= Algolia::Index.new('ncom_game_pt_br_title_des')
   end
 end
