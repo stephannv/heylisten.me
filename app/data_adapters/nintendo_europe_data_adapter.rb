@@ -49,7 +49,8 @@ class NintendoEuropeDataAdapter
 
   private def image_url
     url = @data[:image_url_sq_s] || @data[:image_url]
-    "https:#{url}"
+    url = "http:#{url}" if url.start_with?('//')
+    url
   end
 
   private def website_url
