@@ -55,6 +55,18 @@ class NintendoAlgoliaDataAdapter
 
   private def image_url
     "https://www.nintendo.com#{@data['boxart']}"
+    url = @data['boxart']
+    return banner_picture_url || "https://via.placeholder.com/540x360?text=No%20image" if url.blank?
+    url = "https://www.nintendo.com#{url}" unless url.start_with?('http')
+    url
+  end
+
+  def banner_picture_url
+    return if @data['horizontalHeaderImage'].blank?
+
+    url = @data['horizontalHeaderImage']
+    url = "https://www.nintendo.com#{url}" unless url.start_with?('http')
+    url
   end
 
   private def website_url
