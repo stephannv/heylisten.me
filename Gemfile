@@ -12,11 +12,11 @@ gem 'mongoid', '7.1.2'
 gem 'mutations', '0.9.1'
 gem 'nokogiri', '1.10.10'
 # gem 'puma', '4.3.5'
-gem 'rails', '6.0.3.2'
+gem 'rails', '6.0.4.8'
 # gem 'sass-rails', '6.0.0'
 gem 'simple_enum', '2.3.2', require: 'simple_enum/mongoid'
 # gem 'turbolinks', '5.2.1'
-gem 'twitter', '7.0.0'
+# gem 'twitter', '7.0.0'
 gem 'tzinfo-data', '2.0.2', platforms: %i[mingw mswin x64_mingw jruby]
 # gem 'webpacker', '5.1.1'
 gem 'whenever', '1.0.0', require: false

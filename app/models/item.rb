@@ -59,8 +59,6 @@ class Item
   validates :identifier, length: { maximum: 255 }
   validates :title, length: { maximum: 255 }
   validates :pretty_release_date, length: { maximum: 32 }
-  validates :image_url, length: { maximum: 255 }
-  validates :website_url, length: { maximum: 255 }
 
   #################
   ### CALLBACKS ###
