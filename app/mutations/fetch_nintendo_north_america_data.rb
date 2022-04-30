@@ -4,7 +4,9 @@ class FetchNintendoNorthAmericaData < Mutations::Command
   end
 
   private def fetch_all_data
+    puts "== Importing North America data =="
     all_data = queries.flat_map do |query|
+      puts "> querying with #{query}"
       fetch_data(query: query)
     end
 
@@ -16,7 +18,9 @@ class FetchNintendoNorthAmericaData < Mutations::Command
   end
 
   private def fetch_data(query:)
+    puts "query asc"
     data = client.fetch(index: client.index_asc, query: query)
+    puts "query desc"
     data += client.fetch(index: client.index_desc, query: query) if data.size >= 1000
     data
   end

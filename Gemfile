@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
-gem 'algoliasearch', '1.27.3'
+gem 'algolia', '2.2.3'
 gem 'bootsnap', '1.4.7', require: false
 gem 'discordrb', '3.3.0'
 gem 'down', '5.1.1'
